@@ -42,17 +42,77 @@ public class CheckingAccount implements HasMenu, Serializable {
 			} // end if
 			else if (response.equals("1")){
 				System.out.println(" Checking balance now... ");
+				this.checkBalance();
 			} // end else if 1
 			else if (response.equals("2")){
 				System.out.println(" Making a desposit now...");
+				this.makeDeposit();
 			} // end else if 2
 			else if (response.equals("3")){
 				System.out.println(" Making a withdrawal now... ");
+				this.makeWithdrawal();
 			} // end else if 3
 			else {
 				System.out.println( " Please enter 0, 1, 2, or 3 ");
 			} // end else
 		} // end while loop
 	} // end start
+
+
+	public double getBalance(){
+		return this.balance;
+	} // end getBalance
+	
+	public String getBalanceString(){
+		String result = String.format("$%.02f", this.balance);
+		return result;
+	} // end getBalanceString
+
+	public void setBalance(double balance){
+		this.balance = balance;
+	} // end setBalance
+	
+	private double getDouble(){
+		Scanner input = new Scanner(System.in);
+		String resultString = input.nextLine();
+		double result = 0d;
+		try {
+			result = Double.parseDouble(resultString);
+		} // end try
+		catch (Exception e) {
+			System.out.println("Cannot use this value. Changing to 0. ");
+			result = 0d;
+		} //end catch
+		return result;
+	} // end getDouble
+
+	public void checkBalance(){
+		System.out.print("Current Balance: ");
+		System.out.println(this.getBalanceString());
+	} // end checkBalance
+
+	public void makeDeposit(){
+		System.out.print(" How much do you want to deposit? ");
+		double deposit = this.getDouble();
+		this.balance += deposit;
+		System.out.println("New balance: " + this.getBalanceString());
+	} // end makeDeposit
+	
+	public void makeWithdrawal(){
+		System.out.print("How much would you like to withdrawal? ");
+		double withdrawal = this.getDouble();
+		if (withdrawal > this.balance){
+			System.out.println("Insufficient Funds. ");
+		} // end if
+		else if (withdrawal < 0) {
+			System.out.println("Make a deposit elsewhere. ");
+		} // end else if
+		else {
+			this.balance -= withdrawal;
+		} // end else
+		System.out.println("New balance: " + this.getBalanceString());
+	} // end makeWithdrawal
+	
+	
 
 } // end Checking Account Class definition
