@@ -47,14 +47,14 @@ public class Customer extends User implements Serializable {
 			} // end else if
 			else if (result.equals("2")) {
                                 System.out.println("Savings account: ");
-                                this.saving.start();
+                                this.savings.start();
                         } // end else if
 			else if (result.equals("3")) {
                                 System.out.println("Change PIN: ");
 				System.out.println("What would you like to change it to? ");
 				Scanner input = new Scanner(System.in);
 				String newPIN = input.nextLine();
-                                this.user.setPIN(newPIN);
+                                this.setPIN(newPIN);
                         } // end else if
 			else {
 				System.out.println("You should enter 0, 1 , 2, or 3");
